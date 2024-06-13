@@ -1,27 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/navbar.css";
 
 const NavBar = () => {
   return (
-    <div className="navbar">
-      <img
-        src="https://mcrcodes.s3.eu-west-2.amazonaws.com/course/surreal-estate/logo.png"
-        alt="logo"
-      />
-      <ul className="navbar-links">
-        <li className="navbar-links-item">
-          <Link className="item" to="/">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="navbar-brand">
+        <img
+          src="https://mcrcodes.s3.eu-west-2.amazonaws.com/course/surreal-estate/logo.png"
+          alt="logo"
+          style={{ height: "100px" }}
+        />
+      </div>
+      <div className="navbar-nav">
+        <div className="nav-item nav-link">
+          <Link style={{ textDecoration: "none" }} to="/">
             View properties
           </Link>
-        </li>
-        <li className="navbar-links-item">
-          <Link className="item" to="/add-property">
+          <span> &nbsp;</span>
+        </div>
+        <div className="nav-item nav-link">
+          <Link style={{ textDecoration: "none" }} to="/add-property">
             Add property
           </Link>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 

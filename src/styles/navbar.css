@@ -1,15 +1,15 @@
 .navbar {
-    background-color: white;
-    border-bottom: 5px solid grey;
+  background-color: white;
+  border-bottom: 5px solid grey;
 }
 
 .navbar-links {
-margin: 0;
-padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-links-item {
-    display: inline-block;
-    padding: 10px;
-    margin: 0;
+  display: inline-block;
+  padding: 0 10px;
+  margin: 0;
 }
