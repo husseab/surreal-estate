@@ -1,22 +1,44 @@
 import React, { useState } from "react";
+import { createPropertyListing } from "../service/Properties.service";
+import { Alert } from "antd";
 
 const AddProperty = () => {
   const initialState = {
     fields: {
       title: "",
       city: "Manchester",
-      type: "",
+      type: "Flat",
       bedrooms: 1,
       bathrooms: 1,
       price: 0,
       email: "",
     },
+    alert: {
+      message: '',
+      isSuccess: false,
+    }
   };
 
   const [fields, setFields] = useState(initialState.fields);
+  const [alert, setAlert] = useState(initialState.alert)
+
   const handleAddProperty = (event) => {
     event.preventDefault();
-    console.log(fields);
+    setAlert({ message: "", isSuccess: false });
+    const responseCode = createPropertyListing(fields);
+    if(responseCode === 201) {
+      setAlert({
+        message: "Property Added",
+        isSuccess: true,
+      })
+    } else {
+      setAlert({
+        message: "Server error. Please try again later.",
+        isSuccess: false,
+      })  
+
+    }
+
   };
   const handleFieldChange = (event) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
@@ -148,6 +170,10 @@ const AddProperty = () => {
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
+        </div>
+        <br/>
+        <div className="col-6">
+          {!alert.message ? "" : <Alert message={alert.message}  type={alert.isSuccess ? "success" : "error"} />}
         </div>
       </form>
     </div>
