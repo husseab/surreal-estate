@@ -26,6 +26,7 @@
     "react/jsx-props-no-spreading": [0],
     "react/prop-types": [0],
     "react/jsx-curly-brace-presence": ["error", "ignore"],
+    "no-return-await": "off",
     "import/order": [1],
     "no-unused-vars": [1],
     "prettier/prettier": [1, { "endOfLine": "auto" }],

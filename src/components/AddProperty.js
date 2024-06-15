@@ -14,31 +14,33 @@ const AddProperty = () => {
       email: "",
     },
     alert: {
-      message: '',
+      message: "",
       isSuccess: false,
-    }
+    },
   };
 
   const [fields, setFields] = useState(initialState.fields);
-  const [alert, setAlert] = useState(initialState.alert)
+  const [alert, setAlert] = useState(initialState.alert);
 
   const handleAddProperty = (event) => {
     event.preventDefault();
-    setAlert({ message: "", isSuccess: false });
-    const responseCode = createPropertyListing(fields);
-    if(responseCode === 201) {
-      setAlert({
-        message: "Property Added",
-        isSuccess: true,
-      })
-    } else {
-      setAlert({
-        message: "Server error. Please try again later.",
-        isSuccess: false,
-      })  
+    (async () => {
+      setAlert({ message: "", isSuccess: false });
 
-    }
-
+      const responseCode = await createPropertyListing(fields);
+      console.log("responseCode", responseCode);
+      if (responseCode === 201) {
+        setAlert({
+          message: "Property Added",
+          isSuccess: true,
+        });
+      } else {
+        setAlert({
+          message: "Server error. Please try again later.",
+          isSuccess: false,
+        });
+      }
+    })();
   };
   const handleFieldChange = (event) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
@@ -171,9 +173,16 @@ const AddProperty = () => {
             Submit
           </button>
         </div>
-        <br/>
+        <br />
         <div className="col-6">
-          {!alert.message ? "" : <Alert message={alert.message}  type={alert.isSuccess ? "success" : "error"} />}
+          {!alert.message ? (
+            ""
+          ) : (
+            <Alert
+              message={alert.message}
+              type={alert.isSuccess ? "success" : "error"}
+            />
+          )}
         </div>
       </form>
     </div>

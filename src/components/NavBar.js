@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="navbar-brand">
         <img
           src="https://mcrcodes.s3.eu-west-2.amazonaws.com/course/surreal-estate/logo.png"
