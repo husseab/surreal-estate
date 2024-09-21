@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 // import "../styles/app.css";
-import AddProperty from "./AddProperty";
+import AddProperty from "./add_property/AddProperty";
 import NavBar from "./NavBar";
-import Properties from "./Properties";
+import Properties from "./view_properties/ViewProperties";
 
 const App = () => {
   return (
@@ -11,6 +11,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<Properties />} />
+        <Route path="/view-properties" element={<Properties />} />
         <Route path="/add-property" element={<AddProperty />} />
       </Routes>
     </>

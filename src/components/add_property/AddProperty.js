@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createPropertyListing } from "../service/Properties.service";
+import { createPropertyListing } from "../../service/Properties.service";
 import { Alert } from "antd";
 
 const AddProperty = () => {
