@@ -46,11 +46,11 @@ const AddProperty = () => {
     setFields({ ...fields, [event.target.name]: event.target.value });
   };
   return (
-    <div className="container">
+    <div className="container mt-4 bg-white">
       <br />
       <h4>Add Property Page</h4>
       <br />
-      <form className="row g-3" onSubmit={handleAddProperty}>
+      <form className="row g-2" onSubmit={handleAddProperty}>
         <div className="col-md-3">
           <label className="form-label" htmlFor="title">
             Title
@@ -174,7 +174,7 @@ const AddProperty = () => {
           </button>
         </div>
         <br />
-        <div className="col-6">
+        <div className="col-6 mb-2">
           {!alert.message ? (
             ""
           ) : (

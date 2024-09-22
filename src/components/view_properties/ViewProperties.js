@@ -61,7 +61,7 @@ const Properties = () => {
                         <h5 className="card-title">{item.title}</h5>
                         <p className="card-text mb-3 flex-grow-1">
                           {
-                            "Surreal Estate propeties are all top class properties that will meet your needs."
+                            "Surreal Estate propeties are mock properties to test features."
                           }
                         </p>
                       </div>
