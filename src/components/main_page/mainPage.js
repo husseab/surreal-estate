@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const MainComponent = () => {
+  const { isAuthenticated, isLoading, user } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+  console.log(JSON.stringify(user), isAuthenticated, "test");
   return (
     <div className="container mt-4">
       <div className="card" style={{ width: "18 rem" }}>
@@ -13,16 +21,21 @@ const MainComponent = () => {
             }
           </p>
           <div className="d-flex gap-2">
-            <Link to={"/view-properties"}>
-              <button className="btn btn-primary me-2 mb-2" type="button">
-                View Properties
+            {!isAuthenticated ? (
+              <button
+                className="btn btn-primary me-2 mb-2"
+                type="button"
+                onClick={() => loginWithRedirect()}
+              >
+                Log In
               </button>
-            </Link>
-            <Link to={"/add-property"}>
-              <button className="btn btn-primary me-2 mb-2" type="button">
-                Add Property
-              </button>
-            </Link>
+            ) : (
+              <Link to={"/add-property"}>
+                <button className="btn btn-primary me-2 mb-2" type="button">
+                  Add Property
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

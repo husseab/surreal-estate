@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
   const [hover, setHover] = useState("");
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -19,44 +21,94 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="navbar-nav me-auto">
-          <div className="nav-item nav-link">
-            <Link
-              to="/view-properties"
-              style={{
-                textDecoration: "none",
-                color: hover === "view-properties" ? "blue" : "black",
-              }}
-              onMouseEnter={() => setHover("view-properties")}
-              onMouseLeave={() => setHover(false)}
-            >
-              View properties
-            </Link>
-            <span> &nbsp;</span>
-          </div>
-          <div className="nav-item nav-link">
-            <Link
-              to="/add-property"
-              style={{
-                textDecoration: "none",
-                color: hover === "add-property" ? "blue" : "black",
-              }}
-              onMouseEnter={() => setHover("add-property")}
-              onMouseLeave={() => setHover(false)}
-            >
-              Add property
-            </Link>
-          </div>
+          {!isAuthenticated ? (
+            ""
+          ) : (
+            <>
+              <div className="nav-item nav-link">
+                <Link
+                  to="/view-properties"
+                  style={{
+                    textDecoration: "none",
+                    color: hover === "view-properties" ? "blue" : "black",
+                  }}
+                  onMouseEnter={() => setHover("view-properties")}
+                  onMouseLeave={() => setHover(false)}
+                >
+                  View properties
+                </Link>
+                <span> &nbsp;</span>
+              </div>
+              <div className="nav-item nav-link">
+                <Link
+                  to="/add-property"
+                  style={{
+                    textDecoration: "none",
+                    color: hover === "add-property" ? "blue" : "black",
+                  }}
+                  onMouseEnter={() => setHover("add-property")}
+                  onMouseLeave={() => setHover(false)}
+                >
+                  Add property
+                </Link>
+              </div>
+            </>
+          )}
         </div>
         <div className="d-flex align-items-center me-5">
           {" "}
           {/* Flex container for alignment */}
-          <span
-            className="material-icons"
-            style={{ fontSize: "30px", marginRight: "5px" }}
-          >
-            account_circle
-          </span>
-          <span className="navbar-text">John Smith</span>
+          {isAuthenticated ? (
+            <>
+              <span className="navbar-text">{user.name}</span>
+              <span> &nbsp;</span>
+
+              <span
+                className="material-icons"
+                style={{ fontSize: "30px", marginRight: "5px" }}
+              >
+                account_circle
+              </span>
+              <span> &nbsp;</span>
+
+              <div
+                className="nav-item nav-link"
+                style={{
+                  color: hover === "logout" ? "blue" : "black",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={() => setHover("logout")}
+                onMouseLeave={() => setHover(false)}
+                onClick={() =>
+                  logout({ logoutParams: { returnTo: window.location.origin } })
+                }
+              >
+                Logout
+              </div>
+            </>
+          ) : (
+            <>
+              <span
+                className="material-icons"
+                style={{ fontSize: "30px", marginRight: "5px" }}
+              >
+                account_circle
+              </span>
+              <span> &nbsp;</span>
+              <div
+                className="nav-item nav-link"
+                style={{
+                  color: hover === "login" ? "blue" : "black",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={() => setHover("login")}
+                onMouseLeave={() => setHover(false)}
+                onClick={() => loginWithRedirect()}
+              >
+                Login
+              </div>
+            </>
+          )}
         </div>
       </div>
     </nav>
