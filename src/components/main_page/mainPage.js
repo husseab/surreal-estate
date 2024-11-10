@@ -1,15 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { SessionContext } from "../../contexts/SessionContext";
 
 const MainComponent = () => {
-  const { isAuthenticated, isLoading, user } = useAuth0();
   const { loginWithRedirect } = useAuth0();
+  const { sessionState } = useContext(SessionContext);
+  const navigate = useNavigate();
 
-  if (isLoading) {
-    return <div>Loading ...</div>;
+  useEffect(() => {
+    if (sessionState.isSessionExpired) {
+      navigate("/login");
+    }
+  }, [sessionState.isSessionExpired, navigate]);
+
+  if (sessionState.isLoading) {
+    return <div>Loading...</div>;
   }
-  console.log(JSON.stringify(user), isAuthenticated, "test");
+
+  console.log("test", JSON.stringify(sessionState));
+
   return (
     <div className="container mt-4">
       <div className="card" style={{ width: "18 rem" }}>
@@ -21,7 +31,7 @@ const MainComponent = () => {
             }
           </p>
           <div className="d-flex gap-2">
-            {!isAuthenticated ? (
+            {!sessionState.isAuthenticated ? (
               <button
                 className="btn btn-primary me-2 mb-2"
                 type="button"

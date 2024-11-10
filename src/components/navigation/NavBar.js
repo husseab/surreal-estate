@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { SessionContext } from "../../contexts/SessionContext";
 
 const NavBar = () => {
   const [hover, setHover] = useState("");
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { loginWithRedirect, logout } = useAuth0();
+  const { sessionState } = useContext(SessionContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (sessionState.isSessionExpired) {
+      navigate("/login");
+    }
+  }, [sessionState.isSessionExpired, navigate]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -21,7 +30,7 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="navbar-nav me-auto">
-          {!isAuthenticated ? (
+          {!sessionState.isAuthenticated ? (
             ""
           ) : (
             <>
@@ -58,14 +67,18 @@ const NavBar = () => {
         <div className="d-flex align-items-center me-5">
           {" "}
           {/* Flex container for alignment */}
-          {isAuthenticated ? (
+          {sessionState.isAuthenticated ? (
             <>
-              <span className="navbar-text">{user.name}</span>
+              <span className="navbar-text">{sessionState.user.name}</span>
               <span> &nbsp;</span>
 
               <span
                 className="material-icons"
-                style={{ fontSize: "30px", marginRight: "5px" }}
+                style={{
+                  fontSize: "30px",
+                  marginRight: "5px",
+                  cursor: "default",
+                }}
               >
                 account_circle
               </span>
@@ -90,7 +103,11 @@ const NavBar = () => {
             <>
               <span
                 className="material-icons"
-                style={{ fontSize: "30px", marginRight: "5px" }}
+                style={{
+                  fontSize: "30px",
+                  marginRight: "5px",
+                  cursor: "default",
+                }}
               >
                 account_circle
               </span>

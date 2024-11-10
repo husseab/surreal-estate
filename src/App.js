@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 // import "../styles/app.css";
-import AddProperty from "./add_property/AddProperty";
-import NavBar from "./navigation/NavBar";
-import Properties from "./view_properties/ViewProperties";
-import MainComponent from "./main_page/mainPage";
+import AddProperty from "./components/add_property/AddProperty";
+import NavBar from "./components/navigation/NavBar";
+import Properties from "./components/view_properties/ViewProperties";
+import MainComponent from "./components/main_page/MainPage";
 
 const App = () => {
   return (
