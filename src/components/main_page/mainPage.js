@@ -27,7 +27,7 @@ const MainComponent = () => {
           <h5 className="card-title">Surreal Estate</h5>
           <p className="card-text">
             {
-              "This is a mock real estate site that allows you to view and add properties. It will also allow set properties as favorite and create a favorites list. "
+              "This is a mock real estate site that allows you to view and add properties. It will also allow you to set properties as favorite and create a favorites list. "
             }
           </p>
           <div className="d-flex gap-2">

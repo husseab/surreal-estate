@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Alert } from "antd";
-import {
-  getPropertyListing,
-  // getImage,
-  // getPropertyCount,
-} from "../../service/Properties.service";
-// import { Spin, Alert } from "antd";
+import { getPropertyListing } from "../../service/Properties.service";
 
 const Properties = () => {
   const [propertiesList, setPropertiesList] = useState([]);
   const [alertMessage, setAlertMessage] = useState("");
-  // const [imageUrls, setImageUrls] = useState([]);
-  // const [propertiesCount, setPropertiesCount] = useState(0);
 
   useEffect(() => {
     (async () => {
-      // const totalCount = await getPropertyCount();
       const properties = await getPropertyListing();
-      // const properties = undefined
       if (properties && properties.length > 0) {
         setPropertiesList(properties);
       } else {
@@ -25,32 +16,11 @@ const Properties = () => {
           "Error: Unable to retrieve properties. Server not available."
         );
       }
-      // if (totalCount?.count) {
-      //   setPropertiesCount(totalCount.count);
-      // }
     })();
   }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (propertiesCount) {
-  //       const imagePaths = await getImage(propertiesCount);
-  //       setImageUrls(imagePaths);
-  //     }
-  //   })();
-  // }, [propertiesCount]);
-
   return (
     <div>
-      {/* {!(imageUrls.length > 0) ? (
-        <Spin tip="Loading...">
-          <Alert
-            message="Loading up properties..."
-            description="Please take deep breaths."
-            type="info"
-          />
-        </Spin>
-      ) : ( */}
       <div className="container mt-4">
         <div className="row g-4">
           {alertMessage ? (
