@@ -8,16 +8,21 @@ const Properties = () => {
 
   useEffect(() => {
     (async () => {
-      const properties = await getPropertyListing();
-      if (properties && properties.length > 0) {
-        setPropertiesList(properties);
-      } else {
-        setAlertMessage(
-          "Error: Unable to retrieve properties. Server not available."
-        );
+      try {
+        const properties = await getPropertyListing();
+  
+        // Check if properties are available
+        if (properties && properties.length > 0) {
+          setPropertiesList(properties);
+        } else {
+          setAlertMessage("No properties available.");
+        }
+      } catch (err) {
+        setAlertMessage(err.message); // Handle error from the service function
       }
     })();
   }, []);
+  
 
   return (
     <div>

@@ -67,7 +67,8 @@ const NavBar = () => {
         <div className="d-flex align-items-center me-5">
           {" "}
           {/* Flex container for alignment */}
-          {sessionState.isAuthenticated ? (
+          {sessionState.isLoading ? ""  : 
+          sessionState.isAuthenticated ? (
             <>
               <span className="navbar-text">{sessionState.user.name}</span>
               <span> &nbsp;</span>
@@ -125,7 +126,8 @@ const NavBar = () => {
                 Login
               </div>
             </>
-          )}
+          )
+          }
         </div>
       </div>
     </nav>

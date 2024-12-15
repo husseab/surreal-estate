@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import AddProperty from "./components/add_property/AddProperty";
 import NavBar from "./components/navigation/NavBar";
 import Properties from "./components/view_properties/ViewProperties";
-import MainComponent from "./components/main_page/MainPage";
+import MainComponent from "./components/main_page/mainPage";
 
 const App = () => {
   return (
