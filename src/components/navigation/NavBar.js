@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { SessionContext } from "../../contexts/SessionContext";
 
-const NavBar = () => {
+const NavBar = ({showAlert}) => {
   const [hover, setHover] = useState("");
   const { loginWithRedirect, logout } = useAuth0();
   const { sessionState } = useContext(SessionContext);
@@ -68,9 +68,9 @@ const NavBar = () => {
           {" "}
           {/* Flex container for alignment */}
           {sessionState.isLoading ? ""  : 
-          sessionState.isAuthenticated ? (
+          sessionState.isAuthenticated || showAlert ? (
             <>
-              <span className="navbar-text">{sessionState.user.name}</span>
+              <span className="navbar-text">{sessionState.user?.name}</span>
               <span> &nbsp;</span>
 
               <span
